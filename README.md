@@ -12,6 +12,18 @@ npx http-server -p 8080
 
 Для хостинга подойдёт GitHub Pages, Netlify, Vercel или обычный nginx: просто залей файлы.
 
+## GitHub Pages
+
+Сайт открывается по адресу **https://aloxins.github.io/pidr/**, когда Pages включён:
+
+1. Репозиторий должен быть публичным (на бесплатном аккаунте Pages не работает с приватными):
+   **Settings → General → Danger Zone → Change visibility → Make public**.
+2. **Settings → Pages → Build and deployment**:
+   Source: **Deploy from a branch**, Branch: `claude/gmod-server-website-51loz5`, папка `/ (root)` → **Save**.
+3. Подожди 1–2 минуты, и сайт появится по ссылке выше. Статус сборки видно во вкладке **Actions**.
+
+После этого каждый пуш в эту ветку автоматически обновляет сайт. Файл `.nojekyll` отключает обработку Jekyll, чтобы GitHub отдавал файлы как есть.
+
 ## Настройка
 
 Всё, что относится к серверу, лежит в объекте `CONFIG` в начале `js/main.js`:
