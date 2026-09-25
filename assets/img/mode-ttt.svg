@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <radialGradient id="bg" cx=".5" cy=".35" r=".8">
+      <stop offset="0" stop-color="#2a0b12"/>
+      <stop offset=".6" stop-color="#0c0508"/>
+      <stop offset="1" stop-color="#050203"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe9c7" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffe9c7" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="tile" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="#12080a"/>
+      <rect width="30" height="30" fill="#1b0c10"/>
+      <rect x="30" y="30" width="30" height="30" fill="#1b0c10"/>
+    </pattern>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <path d="M0 330h800v170H0Z" fill="url(#tile)" transform="matrix(1 0 0 1 0 0)" opacity=".9"/>
+  <path d="M0 330h800" stroke="#3a1419" stroke-width="3"/>
+  <path d="M370 0h60l150 420H220Z" fill="url(#beam)"/>
+  <ellipse cx="400" cy="420" rx="190" ry="26" fill="#ffe9c7" opacity=".12" filter="url(#soft)"/>
+  <rect x="385" y="0" width="30" height="14" fill="#333"/>
+  <g>
+    <g transform="translate(170 190)" fill="#050203">
+      <circle cx="40" cy="30" r="26"/>
+      <path d="M0 230c0-90 10-160 40-160s40 70 40 160Z"/>
+      <circle cx="30" cy="28" r="4" fill="#3dff8a" filter="url(#glow)"/>
+      <circle cx="50" cy="28" r="4" fill="#3dff8a" filter="url(#glow)"/>
+    </g>
+    <g transform="translate(360 160)" fill="#050203">
+      <circle cx="40" cy="34" r="30"/>
+      <path d="M-6 260c0-100 12-180 46-180s46 80 46 180Z"/>
+      <circle cx="28" cy="32" r="5" fill="#ff2442" filter="url(#glow)"/>
+      <circle cx="52" cy="32" r="5" fill="#ff2442" filter="url(#glow)"/>
+      <path d="M78 150l40-30 6 8-40 30Z" fill="#cfd6dd"/>
+    </g>
+    <g transform="translate(560 200)" fill="#050203">
+      <circle cx="40" cy="28" r="24"/>
+      <path d="M2 220c0-86 10-150 38-150s38 64 38 150Z"/>
+      <circle cx="31" cy="26" r="4" fill="#3d9bff" filter="url(#glow)"/>
+      <circle cx="49" cy="26" r="4" fill="#3d9bff" filter="url(#glow)"/>
+    </g>
+  </g>
+  <g font-family="Arial Black, sans-serif" font-weight="900" filter="url(#glow)">
+    <text x="40" y="70" font-size="34" fill="#ff2442">TRAITOR</text>
+    <text x="40" y="104" font-size="18" fill="#3dff8a" letter-spacing="6">INNOCENT</text>
+    <text x="40" y="128" font-size="18" fill="#3d9bff" letter-spacing="6">DETECTIVE</text>
+  </g>
+  <g transform="translate(690 70)" stroke="#ff2442" stroke-width="3" fill="none" filter="url(#glow)">
+    <circle r="26"/><path d="M0-38v20M0 18v20M-38 0h20M18 0h20"/>
+  </g>
+</svg>

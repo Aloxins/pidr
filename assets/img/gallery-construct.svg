@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6fb7e8"/><stop offset="1" stop-color="#d9eef9"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#9aa4ab"/><path d="M40 0H0v40" fill="none" stroke="#7d878e" stroke-width="2"/>
+    </pattern>
+    <pattern id="orange" width="30" height="30" patternUnits="userSpaceOnUse">
+      <rect width="30" height="30" fill="#e8a24a"/><path d="M30 0H0v30" fill="none" stroke="#b97524" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".9">
+    <ellipse cx="150" cy="80" rx="70" ry="18"/><ellipse cx="200" cy="70" rx="50" ry="20"/>
+    <ellipse cx="600" cy="110" rx="90" ry="20"/><ellipse cx="650" cy="96" rx="50" ry="18"/>
+  </g>
+  <path d="M0 280h800v220H0Z" fill="url(#grid)"/>
+  <path d="M0 280 250 280 150 500H0Z" fill="#6d8a4a"/>
+  <g>
+    <path d="M300 140h320v160H300Z" fill="url(#orange)"/>
+    <path d="M300 140 380 100h320l-80 40Z" fill="#f3c27d"/>
+    <path d="M620 140 700 100v160l-80 40Z" fill="#b97524"/>
+    <rect x="440" y="220" width="50" height="80" fill="#3b2a1a"/>
+    <rect x="340" y="180" width="60" height="40" fill="#2a3a4a"/>
+    <rect x="530" y="180" width="60" height="40" fill="#2a3a4a"/>
+  </g>
+  <g transform="translate(220 360)">
+    <rect x="0" y="0" width="200" height="60" rx="8" fill="#e8e8e8" stroke="#888" stroke-width="3"/>
+    <rect x="20" y="-30" width="110" height="36" rx="8" fill="#e8e8e8" stroke="#888" stroke-width="3"/>
+    <circle cx="40" cy="64" r="20" fill="#222"/><circle cx="160" cy="64" r="20" fill="#222"/>
+    <rect x="40" y="-24" width="36" height="24" fill="#6fb7e8"/><rect x="82" y="-24" width="36" height="24" fill="#6fb7e8"/>
+  </g>
+  <g transform="translate(600 380)">
+    <circle r="40" fill="#48b03a"/><path d="M0-40c-8 20-8 60 0 80M-22-34c-14 18-14 50 0 68M22-34c14 18 14 50 0 68" stroke="#123d14" stroke-width="5" fill="none"/>
+  </g>
+  <text x="40" y="470" font-family="Arial Black, sans-serif" font-size="22" fill="#fff" opacity=".8">gm_construct</text>
+</svg>

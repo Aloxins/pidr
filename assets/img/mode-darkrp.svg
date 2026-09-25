@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0520"/>
+      <stop offset=".55" stop-color="#3a0d4f"/>
+      <stop offset=".8" stop-color="#b3246a"/>
+      <stop offset="1" stop-color="#ff7a59"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a0b26"/>
+      <stop offset="1" stop-color="#050309"/>
+    </linearGradient>
+    <pattern id="win" width="18" height="22" patternUnits="userSpaceOnUse">
+      <rect x="4" y="5" width="8" height="10" fill="#ffd36e" opacity=".85"/>
+    </pattern>
+    <pattern id="win2" width="14" height="18" patternUnits="userSpaceOnUse">
+      <rect x="3" y="4" width="6" height="8" fill="#6ef0ff" opacity=".7"/>
+    </pattern>
+    <pattern id="winoff" width="18" height="22" patternUnits="userSpaceOnUse">
+      <rect x="4" y="5" width="8" height="10" fill="#2a1840"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd27a"/>
+      <stop offset=".6" stop-color="#ff5a8a"/>
+      <stop offset="1" stop-color="#ff5a8a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".7">
+    <circle cx="60" cy="40" r="1.2"/><circle cx="160" cy="90" r="1"/><circle cx="260" cy="30" r="1.4"/>
+    <circle cx="420" cy="60" r="1"/><circle cx="520" cy="20" r="1.2"/><circle cx="700" cy="70" r="1.4"/>
+    <circle cx="610" cy="110" r="1"/><circle cx="340" cy="120" r="1"/><circle cx="740" cy="30" r="1"/>
+  </g>
+  <circle cx="400" cy="300" r="150" fill="url(#sun)"/>
+  <g fill="#0d0618">
+    <rect x="0" y="210" width="70" height="150"/>
+    <rect x="60" y="170" width="60" height="190"/>
+    <rect x="130" y="240" width="80" height="120"/>
+    <rect x="590" y="220" width="70" height="140"/>
+    <rect x="650" y="160" width="60" height="200"/>
+    <rect x="710" y="230" width="90" height="130"/>
+  </g>
+  <g>
+    <rect x="200" y="120" width="90" height="240" fill="#150a26"/>
+    <rect x="200" y="120" width="90" height="240" fill="url(#win)"/>
+    <rect x="300" y="80" width="70" height="280" fill="#120822"/>
+    <rect x="300" y="80" width="70" height="280" fill="url(#win2)"/>
+    <rect x="330" y="40" width="10" height="40" fill="#120822"/>
+    <circle cx="335" cy="38" r="4" fill="#ff3d81" filter="url(#glow)"/>
+    <rect x="380" y="150" width="100" height="210" fill="#150a26"/>
+    <rect x="380" y="150" width="100" height="210" fill="url(#winoff)"/>
+    <rect x="490" y="100" width="80" height="260" fill="#130824"/>
+    <rect x="490" y="100" width="80" height="260" fill="url(#win)"/>
+  </g>
+  <g filter="url(#glow)" font-family="Arial Black, sans-serif" font-weight="900">
+    <rect x="388" y="176" width="84" height="36" rx="6" fill="none" stroke="#3df5ff" stroke-width="3"/>
+    <text x="430" y="202" text-anchor="middle" font-size="20" fill="#3df5ff">BAR</text>
+    <rect x="80" y="200" width="30" height="80" rx="4" fill="none" stroke="#ff3d81" stroke-width="3"/>
+    <text x="95" y="228" text-anchor="middle" font-size="16" fill="#ff3d81">2</text>
+    <text x="95" y="248" text-anchor="middle" font-size="16" fill="#ff3d81">4</text>
+    <text x="95" y="268" text-anchor="middle" font-size="16" fill="#ff3d81">7</text>
+  </g>
+  <rect x="0" y="360" width="800" height="140" fill="url(#road)"/>
+  <rect x="0" y="356" width="800" height="6" fill="#ff3d81" opacity=".6" filter="url(#glow)"/>
+  <g stroke="#ffd36e" stroke-width="6" stroke-linecap="round" opacity=".8">
+    <path d="M400 380v10"/><path d="M400 405v18"/><path d="M400 440v30"/><path d="M400 485v20"/>
+  </g>
+  <g stroke="#3a1d55" stroke-width="2">
+    <path d="M390 362 40 500"/><path d="M410 362 760 500"/>
+  </g>
+  <g transform="translate(470 400)">
+    <path d="M0 40c0-18 14-26 34-28l24-20h70l28 20c18 2 30 12 30 28v10H0Z" fill="#0b0612"/>
+    <path d="M60 -4h32v18H44Z M98 -4h26l22 18H98Z" fill="#3df5ff" opacity=".5"/>
+    <circle cx="40" cy="50" r="14" fill="#050309" stroke="#333" stroke-width="3"/>
+    <circle cx="146" cy="50" r="14" fill="#050309" stroke="#333" stroke-width="3"/>
+    <rect x="176" y="22" width="12" height="8" rx="2" fill="#fff6c2" filter="url(#glow)"/>
+    <rect x="-2" y="22" width="10" height="8" rx="2" fill="#ff2442" filter="url(#glow)"/>
+  </g>
+  <path d="M188 430 800 380v70Z" fill="#fff6c2" opacity=".06"/>
+</svg>

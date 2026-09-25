@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOVA — Garry's Mod сервер</title>
+  <meta name="description" content="NOVA — Garry's Mod сервер: DarkRP, TTT, Sandbox и Prop Hunt. Живое комьюнити, ивенты каждую неделю и адекватная администрация.">
+  <meta name="theme-color" content="#07060d">
+  <meta property="og:title" content="NOVA — Garry's Mod сервер">
+  <meta property="og:description" content="DarkRP, TTT, Sandbox и Prop Hunt. Залетай!">
+  <meta property="og:image" content="assets/img/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/Unbounded-cyrillic-4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Manrope-cyrillic-2.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+
+  <!-- Прелоадер -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <svg class="preloader__logo" viewBox="0 0 120 120" fill="none">
+      <defs>
+        <linearGradient id="plg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#3df5ff"/><stop offset=".55" stop-color="#7b5cff"/><stop offset="1" stop-color="#ff3d81"/>
+        </linearGradient>
+      </defs>
+      <path class="draw" d="M60 6 106 32v56L60 114 14 88V32Z" stroke="url(#plg)" stroke-width="5" stroke-linejoin="round"/>
+      <path class="draw draw--2" d="M42 80V40l36 40V40" stroke="url(#plg)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="preloader__count"><span id="loadCount">0</span>%</div>
+    <div class="preloader__bar"><i id="loadBar"></i></div>
+  </div>
+
+  <!-- Курсор -->
+  <div class="cursor" id="cursor"><div class="cursor__ring"></div><div class="cursor__dot"></div></div>
+  <div class="progress" id="progress"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Навигация -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" data-magnetic>
+      <img src="assets/img/logo.svg" alt="" width="36" height="36">
+      <span data-server-name>NOVA</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#modes">Режимы</a>
+      <a href="#features">Фишки</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#rules">Правила</a>
+      <a href="#donate">Донат</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#" class="btn btn--small btn--ghost nav__cta" data-connect data-magnetic>Играть</a>
+    <button class="nav__burger" id="burger" aria-label="Меню"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas class="hero__canvas" id="heroCanvas"></canvas>
+      <div class="hero__glow"></div>
+
+      <div class="hero__props" aria-hidden="true">
+        <img src="assets/props/melon.svg"  class="prop prop--melon"  data-depth="0.6" alt="">
+        <img src="assets/props/crate.svg"  class="prop prop--crate"  data-depth="0.35" alt="">
+        <img src="assets/props/barrel.svg" class="prop prop--barrel" data-depth="0.8" alt="">
+        <img src="assets/props/cone.svg"   class="prop prop--cone"   data-depth="0.45" alt="">
+      </div>
+
+      <div class="hero__content">
+        <div class="status-pill reveal" data-delay="0">
+          <span class="status-pill__dot"></span>
+          <span>Онлайн: <b id="heroOnline">—</b> / <span data-max-players>64</span></span>
+          <span class="status-pill__sep"></span>
+          <span id="heroMap" class="mono">rp_downtown_v4c</span>
+        </div>
+
+        <h1 class="hero__title" aria-label="NOVA">
+          <span class="glitch" data-text="NOVA" data-server-name>NOVA</span>
+        </h1>
+
+        <p class="hero__subtitle reveal" data-delay="2">
+          Garry's Mod сервер, где <span class="typer" id="typer">строят города</span><span class="caret">|</span>
+        </p>
+
+        <div class="hero__actions reveal" data-delay="3">
+          <a href="#" class="btn btn--primary" data-connect data-magnetic>
+            <span>Подключиться</span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button class="ip-copy" id="ipCopy" data-magnetic>
+            <span class="ip-copy__label">IP</span>
+            <span class="ip-copy__value mono" data-server-ip>play.nova-gmod.ru:27015</span>
+            <span class="ip-copy__hint" id="ipHint">копировать</span>
+          </button>
+        </div>
+      </div>
+
+      <a href="#stats" class="scroll-hint" aria-label="Листай вниз"><span></span></a>
+    </section>
+
+    <!-- Бегущая строка -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>DarkRP</span><i>✦</i><span>Trouble in Terrorist Town</span><i>✦</i><span>Sandbox</span><i>✦</i><span>Prop Hunt</span><i>✦</i><span>Ивенты</span><i>✦</i><span>Свой контент</span><i>✦</i>
+        <span>DarkRP</span><i>✦</i><span>Trouble in Terrorist Town</span><i>✦</i><span>Sandbox</span><i>✦</i><span>Prop Hunt</span><i>✦</i><span>Ивенты</span><i>✦</i><span>Свой контент</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- Статистика -->
+    <section class="stats" id="stats">
+      <div class="stat reveal"><b class="counter" data-to="12480">0</b><span>игроков за всё время</span></div>
+      <div class="stat reveal" data-delay="1"><b class="counter" data-to="99.8" data-decimals="1" data-suffix="%">0</b><span>аптайм за месяц</span></div>
+      <div class="stat reveal" data-delay="2"><b class="counter" data-to="4">0</b><span>игровых режима</span></div>
+      <div class="stat reveal" data-delay="3"><b class="counter" data-to="15" data-suffix=" мс">0</b><span>средний пинг по РФ</span></div>
+    </section>
+
+    <!-- Режимы -->
+    <section class="section" id="modes">
+      <div class="section__head">
+        <span class="eyebrow reveal">01 — Режимы</span>
+        <h2 class="section__title split">Выбери, во что играть</h2>
+      </div>
+      <div class="modes">
+        <article class="mode tilt reveal" data-delay="0">
+          <div class="mode__img"><img src="assets/img/mode-darkrp.svg" alt="Ночной город DarkRP" loading="lazy"></div>
+          <div class="mode__body">
+            <span class="tag tag--pink">Ролевой</span>
+            <h3>DarkRP</h3>
+            <p>Большой город, 40+ профессий, своя экономика, бизнесы и банды. Стань мэром — или ограбь банк.</p>
+          </div>
+          <div class="mode__glare"></div>
+        </article>
+        <article class="mode tilt reveal" data-delay="1">
+          <div class="mode__img"><img src="assets/img/mode-ttt.svg" alt="Предатели в тёмной комнате" loading="lazy"></div>
+          <div class="mode__body">
+            <span class="tag tag--red">Детектив</span>
+            <h3>TTT</h3>
+            <p>Среди вас предатель. Кастомные карты, магазин снаряжения и честный кармический баланс.</p>
+          </div>
+          <div class="mode__glare"></div>
+        </article>
+        <article class="mode tilt reveal" data-delay="2">
+          <div class="mode__img"><img src="assets/img/mode-sandbox.svg" alt="Арбуз на физганe" loading="lazy"></div>
+          <div class="mode__body">
+            <span class="tag tag--cyan">Творчество</span>
+            <h3>Sandbox</h3>
+            <p>Wiremod, ACF и безлимитные пропы. Собирай машины, базы и безумные контрапции.</p>
+          </div>
+          <div class="mode__glare"></div>
+        </article>
+        <article class="mode tilt reveal" data-delay="3">
+          <div class="mode__img"><img src="assets/img/mode-prophunt.svg" alt="Бочка с глазами прячется" loading="lazy"></div>
+          <div class="mode__body">
+            <span class="tag tag--amber">Прятки</span>
+            <h3>Prop Hunt</h3>
+            <p>Превратись в бочку и замри. Охотники уже рядом. Самый весёлый режим на вечер.</p>
+          </div>
+          <div class="mode__glare"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Фишки -->
+    <section class="section" id="features">
+      <div class="section__head">
+        <span class="eyebrow reveal">02 — Почему мы</span>
+        <h2 class="section__title split">Сервер, на котором хочется остаться</h2>
+      </div>
+      <div class="features">
+        <div class="feature reveal">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></div>
+          <h3>Без лагов</h3>
+          <p>Выделенный Ryzen 9, 128 тикрейт и оптимизированные аддоны. Держим 64 слота без фризов.</p>
+        </div>
+        <div class="feature reveal" data-delay="1">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Адекватная админка</h3>
+          <p>Прозрачные правила, жалобы разбираются за 10 минут, логи всех действий — никакого произвола.</p>
+        </div>
+        <div class="feature reveal" data-delay="2">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+          <h3>Ивенты каждую неделю</h3>
+          <p>Зомби-апокалипсис, гонки, турниры по TTT и мафия. Призы — валюта и эксклюзивные скины.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+          <h3>Свой контент</h3>
+          <p>Уникальные модели, HUD, инвентарь и F4-меню. Всё написано нашей командой с нуля.</p>
+        </div>
+        <div class="feature reveal" data-delay="1">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+          <h3>Быстрая загрузка</h3>
+          <p>Коллекция Workshop весит меньше 1 ГБ, FastDL на своём CDN. Зашёл — и уже играешь.</p>
+        </div>
+        <div class="feature reveal" data-delay="2">
+          <div class="feature__icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M1 21c0-4 4-6 8-6s8 2 8 6"/><path d="M17 4a4 4 0 0 1 0 8M23 21c0-3-2-5-5-6"/></svg></div>
+          <h3>Живое комьюнити</h3>
+          <p>Discord на 5000+ человек, голосовые каналы, мемы и те, с кем реально интересно играть.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Галерея -->
+    <section class="section section--wide" id="gallery">
+      <div class="section__head">
+        <span class="eyebrow reveal">03 — Галерея</span>
+        <h2 class="section__title split">Кадры с сервера</h2>
+      </div>
+      <div class="gallery" id="galleryTrack">
+        <figure class="shot reveal"><img src="assets/img/mode-darkrp.svg" alt="Ночной Downtown" loading="lazy"><figcaption>Ночной Downtown</figcaption></figure>
+        <figure class="shot reveal" data-delay="1"><img src="assets/img/gallery-event.svg" alt="Новогодний ивент" loading="lazy"><figcaption>Новогодний ивент</figcaption></figure>
+        <figure class="shot reveal" data-delay="2"><img src="assets/img/mode-sandbox.svg" alt="Физган и арбуз" loading="lazy"><figcaption>Физган и арбуз</figcaption></figure>
+        <figure class="shot reveal"><img src="assets/img/gallery-construct.svg" alt="gm_construct" loading="lazy"><figcaption>Классика: gm_construct</figcaption></figure>
+        <figure class="shot reveal" data-delay="1"><img src="assets/img/mode-ttt.svg" alt="Раунд TTT" loading="lazy"><figcaption>Кто предатель?</figcaption></figure>
+        <figure class="shot reveal" data-delay="2"><img src="assets/img/mode-prophunt.svg" alt="Prop Hunt" loading="lazy"><figcaption>Бочка, которая смотрит</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Правила -->
+    <section class="section" id="rules">
+      <div class="section__head">
+        <span class="eyebrow reveal">04 — Правила</span>
+        <h2 class="section__title split">Коротко о главном</h2>
+      </div>
+      <ol class="rules">
+        <li class="rule reveal"><span class="rule__n">01</span><div><h3>Уважай других</h3><p>Оскорбления родных, нацизм и травля — бан без предупреждений.</p></div></li>
+        <li class="rule reveal"><span class="rule__n">02</span><div><h3>Никаких читов</h3><p>Любой сторонний софт = перманентный бан на всех наших серверах.</p></div></li>
+        <li class="rule reveal"><span class="rule__n">03</span><div><h3>RDM и NLR</h3><p>Убивать только по RP-причине. После смерти забываешь, что было в прошлой жизни.</p></div></li>
+        <li class="rule reveal"><span class="rule__n">04</span><div><h3>Не мешай серверу</h3><p>Prop spam, краш-контрапции и спам в чат — кик, а потом бан.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- Донат -->
+    <section class="section" id="donate">
+      <div class="section__head">
+        <span class="eyebrow reveal">05 — Поддержать проект</span>
+        <h2 class="section__title split">Привилегии</h2>
+        <p class="section__lead reveal">Все деньги идут на железо и разработку. Никакого pay-to-win — только удобство и косметика.</p>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <div class="plan__inner">
+            <h3>VIP</h3>
+            <div class="plan__price"><b>149</b> ₽/мес</div>
+            <ul><li>Цветной ник в чате</li><li>+2 слота для пропов</li><li>Доступ к VIP-профессиям</li><li>Резервный слот</li></ul>
+            <a href="#" class="btn btn--ghost" data-magnetic>Купить</a>
+          </div>
+        </div>
+        <div class="plan plan--hot reveal" data-delay="1">
+          <div class="plan__inner">
+            <span class="plan__badge">Хит</span>
+            <h3>PREMIUM</h3>
+            <div class="plan__price"><b>349</b> ₽/мес</div>
+            <ul><li>Всё из VIP</li><li>Эксклюзивные модели игрока</li><li>x1.5 зарплата в DarkRP</li><li>Свой тег и эффекты</li></ul>
+            <a href="#" class="btn btn--primary" data-magnetic><span>Купить</span></a>
+          </div>
+        </div>
+        <div class="plan reveal" data-delay="2">
+          <div class="plan__inner">
+            <h3>LEGEND</h3>
+            <div class="plan__price"><b>899</b> ₽/навсегда</div>
+            <ul><li>Всё из PREMIUM навсегда</li><li>Своя модель на заказ</li><li>Роль в Discord</li><li>Имя в титрах сайта</li></ul>
+            <a href="#" class="btn btn--ghost" data-magnetic>Купить</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Команда -->
+    <section class="section" id="team">
+      <div class="section__head">
+        <span class="eyebrow reveal">06 — Команда</span>
+        <h2 class="section__title split">Кто за этим стоит</h2>
+      </div>
+      <div class="team" id="team-grid"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="section__head">
+        <span class="eyebrow reveal">07 — FAQ</span>
+        <h2 class="section__title split">Частые вопросы</h2>
+      </div>
+      <div class="faq">
+        <details class="faq__item reveal"><summary>Как зайти на сервер?<i></i></summary><div class="faq__body"><p>Нажми «Подключиться» — откроется Steam и игра сама подключится. Или скопируй IP и введи в консоли: <code>connect <span data-server-ip>play.nova-gmod.ru:27015</span></code>.</p></div></details>
+        <details class="faq__item reveal"><summary>Нужен ли Counter-Strike: Source?<i></i></summary><div class="faq__body"><p>Нет. Все нужные текстуры уже есть в нашей коллекции Workshop — никаких фиолетово-чёрных квадратов и ERROR.</p></div></details>
+        <details class="faq__item reveal"><summary>Меня забанили, что делать?<i></i></summary><div class="faq__body"><p>Напиши апелляцию в нашем Discord в канале #апелляции. Приложи SteamID и опиши ситуацию — ответим в течение суток.</p></div></details>
+        <details class="faq__item reveal"><summary>Как попасть в администрацию?<i></i></summary><div class="faq__body"><p>Играй от 50 часов, без нарушений, и подай заявку в Discord. Набор открывается раз в месяц.</p></div></details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="join">
+      <div class="cta__bg" aria-hidden="true"></div>
+      <h2 class="cta__title split">Залетай — мы уже на сервере</h2>
+      <p class="reveal">Подключайся к игре и заходи в Discord, чтобы не пропустить ивенты.</p>
+      <div class="hero__actions reveal" data-delay="1">
+        <a href="#" class="btn btn--primary" data-connect data-magnetic><span>Играть сейчас</span></a>
+        <a href="#" class="btn btn--discord" data-discord data-magnetic>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4.6A18 18 0 0 0 15.6 3l-.6 1.1a16 16 0 0 0-6 0L8.4 3A18 18 0 0 0 4 4.6C1.2 8.8.4 12.9.8 17a18 18 0 0 0 5.4 2.7l1.2-1.9a11 11 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 12 0l.4.3-1.8.9 1.2 1.9A18 18 0 0 0 23.2 17c.5-4.7-.8-8.8-3.2-12.4ZM8.7 14.6c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+          <span>Discord</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand"><img src="assets/img/logo.svg" alt="" width="28" height="28"><span data-server-name>NOVA</span></div>
+    <p>© <span id="year">2026</span> <span data-server-name>NOVA</span>. Не связан с Facepunch Studios и Valve.</p>
+    <a href="#top" class="footer__up" data-magnetic>Наверх ↑</a>
+  </footer>
+
+  <!-- Лайтбокс -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Закрыть">×</button>
+    <img id="lightboxImg" alt="">
+    <p id="lightboxCap"></p>
+  </div>
+
+  <div class="toast" id="toast">IP скопирован!</div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
